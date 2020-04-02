@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ACalculator</string>
+    <string name="back">\u003C</string>
+    <string name="question">\u003F</string>
+</resources>
