@@ -5,13 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import kotlinx.android.synthetic.main.activity_main.*
 import net.objecthunter.exp4j.ExpressionBuilder
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration
+import android.widget.ArrayAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,9 +30,8 @@ class MainActivity : AppCompatActivity() {
         Log.i(TAG,"O método onCreate foi invocado")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        /*list_historic.adapter = ArrayAdapter(this,
-            android.R.layout.simple_list_item_1, arrayListOf("1+1=1","2p3=5"))*/
-
+        list_historic.adapter = ArrayAdapter(this,
+            android.R.layout.simple_list_item_1, arrayListOf("1+1=1","2p3=5"))
 
 
         fun onClickSymbol(symbol: String) {
@@ -50,11 +51,11 @@ class MainActivity : AppCompatActivity() {
             Log.i(TAG, "O resultado da expressão é ${text_visor.text}")
         }
 
-        fun onClickReset(symbol: String) {
+        fun onClickReset() {
             text_visor.text = "0"
         }
 
-        fun onClickDeleteLast(symbol: String) {
+        fun onClickDeleteLast() {
             if (text_visor.text.length > 1) {
                 text_visor.text =
                     text_visor.text.toString().substring(0, text_visor.text.length - 1)
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        fun onClickLastCalc(symbol: String) {
+        fun onClickLastCalc() {
             text_visor.text = lastCalc
         }
 
@@ -76,9 +77,9 @@ class MainActivity : AppCompatActivity() {
         button_6.setOnClickListener { onClickSymbol("6") }
         button_point.setOnClickListener { onClickSymbol(".") }
         button_adition.setOnClickListener { onClickSymbol("+") }
-        button_c.setOnClickListener { onClickReset("C") }
-        button_back.setOnClickListener { onClickDeleteLast("<") }
-        button_question.setOnClickListener { onClickLastCalc("?") }
+        button_c.setOnClickListener { onClickReset() }
+        button_back.setOnClickListener { onClickDeleteLast() }
+        button_question.setOnClickListener { onClickLastCalc() }
         button_equals.setOnClickListener { onClickEquals("=") }
 
     }
