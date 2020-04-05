@@ -2,4 +2,6 @@
     <string name="app_name">ACalculator</string>
     <string name="back">\u003C</string>
     <string name="question">\u003F</string>
+    <string name="zero">0</string>
+    <string name="lastCalc">Q</string>
 </resources>
