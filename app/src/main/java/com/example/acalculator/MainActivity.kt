@@ -1,20 +1,15 @@
 package com.example.acalculator
 
-import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
-import android.graphics.Path
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import android.widget.ListView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_expression.view.*
 import net.objecthunter.exp4j.ExpressionBuilder
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -24,7 +19,19 @@ class MainActivity : AppCompatActivity() {
     private val TAG = MainActivity::class.java.simpleName
     private var lastCalc = ""
     private val VISOR_KEY = "visor"
-    private val operationList = ArrayList<String>()
+    var myListView: ListView? = null
+    var operationList = ArrayList<Operation>()
+    var operationListAux = ArrayList<Operation>()
+
+    fun onClickEquals(symbol: String) {
+        Log.i(TAG, "Click no botão $symbol")
+        lastCalc = text_visor.text.toString()
+        val expression = ExpressionBuilder(text_visor.text.toString()).build()
+        text_visor.text = expression.evaluate().toString()
+        Log.i(TAG, "O resultado da expressão é ${text_visor.text}")
+        var operationAux = Operation(lastCalc,expression.evaluate().toString())
+        operationList.add(operationAux)
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,10 +43,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            list_historic?.adapter = HistoryAdapter(
-                this,
-                R.layout.item_expression, operationList
-            )
+            myListView = findViewById<ListView>(R.id.list_historic)
+            var adapter = HistoryAdapter(this, R.layout.item_expression, operationList)
+            myListView?.adapter = adapter
+            adapter.notifyDataSetChanged()
+            button_equals.setOnClickListener {
+                onClickEquals("=")
+                adapter.notifyDataSetChanged()
+            }
+        }
+        else{
+            button_equals.setOnClickListener {
+                onClickEquals("=")
+            }
         }
 
 
@@ -50,15 +66,6 @@ class MainActivity : AppCompatActivity() {
             } else {
                 text_visor.append("$symbol")
             }
-        }
-
-        fun onClickEquals(symbol: String) {
-            Log.i(TAG, "Click no botão $symbol")
-            lastCalc = text_visor.text.toString()
-            val expression = ExpressionBuilder(text_visor.text.toString()).build()
-            text_visor.text = expression.evaluate().toString()
-            Log.i(TAG, "O resultado da expressão é ${text_visor.text}")
-            operationList.add(lastCalc + "=" + expression.evaluate().toString())
         }
 
         fun onClickReset() {
@@ -76,6 +83,12 @@ class MainActivity : AppCompatActivity() {
 
         fun onClickLastCalc() {
             text_visor.text = lastCalc
+        }
+
+        fun onClickHistoric() {
+            val intent = Intent(this, HistoricActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         button_0.setOnClickListener { onClickSymbol("0") }
@@ -98,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         button_division?.setOnClickListener { onClickSymbol("/") }
         button_C.setOnClickListener { onClickReset() }
         button_back.setOnClickListener { onClickDeleteLast() }
-        button_equals.setOnClickListener { onClickEquals("=") }
+        button_historic?.setOnClickListener { onClickHistoric() }
 
     }
 
@@ -164,6 +177,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         text_visor.text = savedInstanceState?.getString(VISOR_KEY)
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -171,23 +185,4 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
     }
 
-}
-
-class HistoryAdapter(context: Context, private val layout: Int, items: ArrayList<String>) :
-    ArrayAdapter<String>(context, layout, items) {
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view = convertView ?: LayoutInflater.from(context).inflate(layout, parent, false)
-        val expressionParts = getItem(position)?.split("=")
-        view.text_expression.text = expressionParts?.get(0)
-        view.text_result.text = expressionParts?.get(1)
-        return view
-
-    }
-}
-
-class Operation(expression: String, result: String) {
-    fun toString(expression: String, result: String): String {
-        return "$expression=$result"
-    }
 }
