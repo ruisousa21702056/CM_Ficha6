@@ -52,6 +52,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="8"
                     android:text="8"
                     />
 
@@ -60,6 +62,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="9"
                     android:text="9"
                     />
 
@@ -68,6 +72,7 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickReset"
                     android:text="CE"
                     />
 
@@ -76,6 +81,7 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickDeleteLast"
                     android:text="@string/back"
                     />
 
@@ -84,6 +90,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="/"
                     android:text="/"
                     />
             </LinearLayout>
@@ -99,6 +107,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="4"
                     android:text="4"
                     />
 
@@ -107,6 +117,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="5"
                     android:text="5"
                     />
 
@@ -115,6 +127,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="6"
                     android:text="6"
                     />
 
@@ -123,6 +137,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="7"
                     android:text="7"
                     />
 
@@ -131,6 +147,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="*"
                     android:text="*"
                     />
             </LinearLayout>
@@ -146,6 +164,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="1"
                     android:text="1"
                     />
 
@@ -154,6 +174,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="2"
                     android:text="2"
                     />
 
@@ -162,6 +184,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="2"
                     android:text="2"
                     />
 
@@ -170,6 +194,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="3"
                     android:text="3"
                     />
 
@@ -178,6 +204,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="-"
                     android:text="-"
                     />
             </LinearLayout>
@@ -193,6 +221,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="0"
                     android:text="0"
                     />
 
@@ -201,6 +231,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="00"
                     android:text="00"
                     />
 
@@ -209,6 +241,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="."
                     android:text="."
                     />
 
@@ -217,6 +251,7 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickEquals"
                     android:text="="
                     />
 
@@ -225,6 +260,8 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:onClick="onClickSymbol"
+                    android:tag="+"
                     android:text="+"
                     />
             </LinearLayout>

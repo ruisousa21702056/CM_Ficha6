@@ -14,7 +14,7 @@ class HistoryAdapter(context: Context, private val layout: Int, items: ArrayList
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view = convertView ?: LayoutInflater.from(context).inflate(layout, parent, false)
         view.text_expression.text = getItem(position)?.expression
-        view.text_result.text = getItem(position)?.result
+        view.text_result.text = getItem(position)?.result.toString()
         return view
     }
 
