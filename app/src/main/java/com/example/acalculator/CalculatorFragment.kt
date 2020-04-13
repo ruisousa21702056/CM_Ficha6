@@ -4,25 +4,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
 import androidx.fragment.app.Fragment
+import butterknife.ButterKnife
+import butterknife.OnClick
+import butterknife.Optional
 import kotlinx.android.synthetic.main.fragment_calculator.*
 import net.objecthunter.exp4j.ExpressionBuilder
+import androidx.recyclerview.widget.LinearLayoutManager
 
 class CalculatorFragment : Fragment() {
 
     private val TAG = MainActivity::class.java.simpleName
     private var lastCalc = ""
     private val VISOR_KEY = "visor"
-    var myListView: ListView? = null
     var operationList = ArrayList<Operation>()
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calculator, container, false)
+        val view = inflater.inflate(R.layout.fragment_calculator, container, false)
+        ButterKnife.bind(this, view)
+        return view
     }
 
+    @Optional
+    @OnClick(R.id.button_0, R.id.button_00, R.id.button_1, R.id.button_2, R.id.button_2_1,
+        R.id.button_3, R.id.button_4, R.id.button_5, R.id.button_6, R.id.button_7, R.id.button_8,
+    R.id.button_adition, R.id.button_division, R.id.button_minus, R.id.button_multiply, R.id.button_point )
     fun onClickSymbol(view: View) {
         val symbol = view.tag.toString()
         if (text_visor.text.toString() == "0") {
@@ -32,10 +39,14 @@ class CalculatorFragment : Fragment() {
         }
     }
 
+    @Optional
+    @OnClick(R.id.button_C)
     fun onClickReset(view: View) {
         text_visor.text = "0"
     }
 
+    @Optional
+    @OnClick(R.id.button_back)
     fun onClickDeleteLast(view: View) {
         if (text_visor.text.length > 1) {
             text_visor.text =
@@ -45,6 +56,7 @@ class CalculatorFragment : Fragment() {
         }
     }
 
+    @OnClick(R.id.button_equals)
     fun onClickEquals(view: View) {
         lastCalc = text_visor.text.toString()
         val expression = ExpressionBuilder(text_visor.text.toString()).build()
@@ -53,11 +65,20 @@ class CalculatorFragment : Fragment() {
         operationList.add(operationAux)
     }
 
+    @Optional
+    @OnClick(R.id.button_lastCalc)
     fun onClickLastCalc(view: View) {
         text_visor.text = lastCalc
     }
 
+    @Optional
+    @OnClick(R.id.button_historic)
     fun onClickHistory(view: View) {
-
+        /*
+        val intent = Intent(this, HistoricActivity::class.java)
+        intent.apply { putParcelableArrayListExtra(EXTRA_HISTORY,ArrayList(operations)) }
+        startActivity(intent)
+        finish()*/
+        NavigationManager.goToHistoryFragment(supportFragmentManager)
     }
 }
