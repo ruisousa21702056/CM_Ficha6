@@ -5,7 +5,5 @@
     android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HistoryFragment"
-    tools:ignore="MissingDefaultResource">
-
+    tools:context=".CalculatorFragment">
 </FrameLayout>

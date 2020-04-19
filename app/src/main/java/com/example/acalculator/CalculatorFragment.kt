@@ -1,5 +1,6 @@
 package com.example.acalculator
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,7 @@ class CalculatorFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)
         ButterKnife.bind(this, view)
+        list_historic?.layoutManager = LinearLayoutManager(activity as Context)
         return view
     }
 
@@ -74,11 +76,28 @@ class CalculatorFragment : Fragment() {
     @Optional
     @OnClick(R.id.button_historic)
     fun onClickHistory(view: View) {
+        NavigationManager.goToHistoryFragment(supportFragmentManager)
+
         /*
         val intent = Intent(this, HistoricActivity::class.java)
         intent.apply { putParcelableArrayListExtra(EXTRA_HISTORY,ArrayList(operations)) }
         startActivity(intent)
         finish()*/
-        NavigationManager.goToHistoryFragment(supportFragmentManager)
+        //NavigationManager.goToHistoryFragment(supportFragmentManager)
     }
+
+    /*
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.run { putString(VISOR_KEY, text_visor.text.toString()) }
+        outState.run { putParcelableArrayList(EXTRA_HISTORY, ArrayList(operationList)) }
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        text_visor.text = savedInstanceState?.getString(VISOR_KEY)
+        operationList = ArrayList(savedInstanceState?.getParcelableArrayList(EXTRA_HISTORY))
+        super.onViewStateRestored(savedInstanceState)
+    }
+
+     */
 }
