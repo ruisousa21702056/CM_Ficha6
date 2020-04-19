@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
 import kotlinx.android.synthetic.main.fragment_calculator.*
 import net.objecthunter.exp4j.ExpressionBuilder
-import androidx.recyclerview.widget.LinearLayoutManager
 
 class CalculatorFragment : Fragment() {
 
@@ -73,18 +73,18 @@ class CalculatorFragment : Fragment() {
         text_visor.text = lastCalc
     }
 
+    /*
     @Optional
     @OnClick(R.id.button_historic)
     fun onClickHistory(view: View) {
-        NavigationManager.goToHistoryFragment(supportFragmentManager)
+        //NavigationManager.goToHistoryFragment(supportFragmentManager)
 
-        /*
+
         val intent = Intent(this, HistoricActivity::class.java)
         intent.apply { putParcelableArrayListExtra(EXTRA_HISTORY,ArrayList(operations)) }
         startActivity(intent)
-        finish()*/
-        //NavigationManager.goToHistoryFragment(supportFragmentManager)
-    }
+        finish()
+    }*/
 
     /*
     override fun onSaveInstanceState(outState: Bundle) {

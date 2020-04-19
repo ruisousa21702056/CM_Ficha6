@@ -53,17 +53,6 @@
             android:textSize="25sp"
 
             />
-
-        <Button
-            android:id="@+id/button_historic"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25"
-            android:backgroundTint="@color/orange"
-            android:text='@string/historic'
-            android:textColor="@color/white"
-            android:textSize="25sp" />
-
     </LinearLayout>
 
     <LinearLayout

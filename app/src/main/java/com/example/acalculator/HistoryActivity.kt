@@ -10,7 +10,7 @@ class HistoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_historic)
-        //NavigationManager.goToCalculatorFragment(supportFragmentManager)
+        NavigationManager.goToHistoryFragment(supportFragmentManager)
         val operations = intent.getParcelableArrayListExtra<Operation>(EXTRA_HISTORY)
 
     }
