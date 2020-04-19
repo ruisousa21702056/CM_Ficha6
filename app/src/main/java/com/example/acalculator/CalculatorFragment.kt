@@ -43,13 +43,13 @@ class CalculatorFragment : Fragment() {
 
     @Optional
     @OnClick(R.id.button_C)
-    fun onClickReset(view: View) {
+    fun onClickReset() {
         text_visor.text = "0"
     }
 
     @Optional
     @OnClick(R.id.button_back)
-    fun onClickDeleteLast(view: View) {
+    fun onClickDeleteLast() {
         if (text_visor.text.length > 1) {
             text_visor.text =
                 text_visor.text.toString().substring(0, text_visor.text.length - 1)
@@ -59,7 +59,7 @@ class CalculatorFragment : Fragment() {
     }
 
     @OnClick(R.id.button_equals)
-    fun onClickEquals(view: View) {
+    fun onClickEquals() {
         lastCalc = text_visor.text.toString()
         val expression = ExpressionBuilder(text_visor.text.toString()).build()
         text_visor.text = expression.evaluate().toString()
@@ -69,7 +69,7 @@ class CalculatorFragment : Fragment() {
 
     @Optional
     @OnClick(R.id.button_lastCalc)
-    fun onClickLastCalc(view: View) {
+    fun onClickLastCalc() {
         text_visor.text = lastCalc
     }
 
