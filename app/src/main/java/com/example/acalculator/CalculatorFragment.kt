@@ -6,26 +6,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
 import kotlinx.android.synthetic.main.fragment_calculator.*
+import kotlinx.android.synthetic.main.fragment_calculator.view.*
 import net.objecthunter.exp4j.ExpressionBuilder
 
-class CalculatorFragment : Fragment() {
+class CalculatorFragment : Fragment(), OnDisplayChanged {
 
-    private val TAG = MainActivity::class.java.simpleName
     private var lastCalc = ""
-    private val VISOR_KEY = "visor"
     var operationList = ArrayList<Operation>()
+    private lateinit var viewModel: CalculatorViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_calculator, container, false)
+        /*val view = inflater.inflate(R.layout.fragment_calculator, container, false)
+        viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
+        viewModel.display.let {view.text_visor.text = it}
         ButterKnife.bind(this, view)
         list_historic?.layoutManager = LinearLayoutManager(activity as Context)
-        return view
+        return view*/
+        viewModel.display.let {view.text_visor.text = it}
+    }
+
+    override fun onStart() {
+        viewModel.registerListener(this)
+        super.onStart()
+    }
+
+    override fun onDisplayChanged(value: String?) {
+        value.let { text_visor.text = it }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
     @Optional
@@ -33,12 +49,7 @@ class CalculatorFragment : Fragment() {
         R.id.button_3, R.id.button_4, R.id.button_5, R.id.button_6, R.id.button_7, R.id.button_8,
     R.id.button_adition, R.id.button_division, R.id.button_minus, R.id.button_multiply, R.id.button_point )
     fun onClickSymbol(view: View) {
-        val symbol = view.tag.toString()
-        if (text_visor.text.toString() == "0") {
-            text_visor.text = "$symbol"
-        } else {
-            text_visor.append("$symbol")
-        }
+        text_visor.text = viewModel.onClickSymbol(view.tag.toString())
     }
 
     @Optional
@@ -60,11 +71,7 @@ class CalculatorFragment : Fragment() {
 
     @OnClick(R.id.button_equals)
     fun onClickEquals() {
-        lastCalc = text_visor.text.toString()
-        val expression = ExpressionBuilder(text_visor.text.toString()).build()
-        text_visor.text = expression.evaluate().toString()
-        val operationAux = Operation(lastCalc,expression.evaluate())
-        operationList.add(operationAux)
+        text_visor.text = viewModel.onClickEquals()
     }
 
     @Optional
