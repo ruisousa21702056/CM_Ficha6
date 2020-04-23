@@ -1,9 +1,7 @@
 package com.example.acalculator
 
-import android.graphics.Path
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlin.concurrent.thread
 
 class ListStorage private constructor(){
 
@@ -23,7 +21,7 @@ class ListStorage private constructor(){
         }
     }
 
-    suspend fun insert(operation: Operation){
+    suspend fun insert(operation: Operation) {
         withContext(Dispatchers.IO) {
             Thread.sleep(30000)
             storage.add(operation)
@@ -31,7 +29,19 @@ class ListStorage private constructor(){
 
     }
 
-    fun getAll(): List<Operation> {
-        return storage.toList()
+    suspend fun getAll(): List<Operation> {
+        var list = mutableListOf<Operation>()
+        withContext(Dispatchers.IO) {
+            Thread.sleep(30000)
+            list = storage
+        }
+        return list.toList()
+    }
+
+    suspend fun delete(operation: Operation) {
+        withContext(Dispatchers.IO) {
+            Thread.sleep(30000)
+            storage.remove(operation)
+        }
     }
 }

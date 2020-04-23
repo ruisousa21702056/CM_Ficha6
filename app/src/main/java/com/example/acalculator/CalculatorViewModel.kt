@@ -7,7 +7,8 @@ class CalculatorViewModel : ViewModel() {
     private var listener: OnDisplayChanged? = null
 
     private val calculatorLogic = CalculatorLogic()
-    var display = ""
+    var display = "0"
+    var list_historic_historic = ArrayList<Operation>()
 
     private fun notifyOnDisplayChanged(){
         listener?.onDisplayChanged(display)
@@ -22,14 +23,25 @@ class CalculatorViewModel : ViewModel() {
         listener = null
     }
 
-    fun onClickSymbol(symbol: String): String {
+    fun onClickSymbol(symbol: String) {
         display = calculatorLogic.insertSymbol(display,symbol)
-        return display
+        notifyOnDisplayChanged()
     }
 
-    fun onClickEquals(): String {
-        val result = calculatorLogic.performOperation(display)
-        display = result.toString()
-        return display
+    fun onClickEquals() {
+        display = calculatorLogic.performOperation(display).toString()
+        notifyOnDisplayChanged()
     }
+
+    fun onClickReset() {
+        display = "0"
+        notifyOnDisplayChanged()
+    }
+
+    fun onDeleteLastCharacter() {
+        display = calculatorLogic.deleteLastCharacter(display)
+        notifyOnDisplayChanged()
+    }
+
+
 }

@@ -13,22 +13,18 @@ import butterknife.OnClick
 import butterknife.Optional
 import kotlinx.android.synthetic.main.fragment_calculator.*
 import kotlinx.android.synthetic.main.fragment_calculator.view.*
-import net.objecthunter.exp4j.ExpressionBuilder
 
 class CalculatorFragment : Fragment(), OnDisplayChanged {
 
     private var lastCalc = ""
-    var operationList = ArrayList<Operation>()
     private lateinit var viewModel: CalculatorViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        /*val view = inflater.inflate(R.layout.fragment_calculator, container, false)
+        val view = inflater.inflate(R.layout.fragment_calculator, container, false)
         viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
-        viewModel.display.let {view.text_visor.text = it}
         ButterKnife.bind(this, view)
         list_historic?.layoutManager = LinearLayoutManager(activity as Context)
-        return view*/
-        viewModel.display.let {view.text_visor.text = it}
+        return view
     }
 
     override fun onStart() {
@@ -41,6 +37,7 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
     }
 
     override fun onDestroy() {
+        viewModel.unregisterListener()
         super.onDestroy()
     }
 
@@ -49,62 +46,30 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
         R.id.button_3, R.id.button_4, R.id.button_5, R.id.button_6, R.id.button_7, R.id.button_8,
     R.id.button_adition, R.id.button_division, R.id.button_minus, R.id.button_multiply, R.id.button_point )
     fun onClickSymbol(view: View) {
-        text_visor.text = viewModel.onClickSymbol(view.tag.toString())
+        viewModel.onClickSymbol(view.tag.toString())
     }
 
     @Optional
     @OnClick(R.id.button_C)
     fun onClickReset() {
-        text_visor.text = "0"
+        viewModel.onClickReset()
     }
 
     @Optional
     @OnClick(R.id.button_back)
     fun onClickDeleteLast() {
-        if (text_visor.text.length > 1) {
-            text_visor.text =
-                text_visor.text.toString().substring(0, text_visor.text.length - 1)
-        } else {
-            text_visor.text = "0"
-        }
+        viewModel.onDeleteLastCharacter()
     }
 
     @OnClick(R.id.button_equals)
     fun onClickEquals() {
-        text_visor.text = viewModel.onClickEquals()
+        viewModel.onClickEquals()
     }
 
+    /*
     @Optional
     @OnClick(R.id.button_lastCalc)
     fun onClickLastCalc() {
         text_visor.text = lastCalc
-    }
-
-    /*
-    @Optional
-    @OnClick(R.id.button_historic)
-    fun onClickHistory(view: View) {
-        //NavigationManager.goToHistoryFragment(supportFragmentManager)
-
-
-        val intent = Intent(this, HistoricActivity::class.java)
-        intent.apply { putParcelableArrayListExtra(EXTRA_HISTORY,ArrayList(operations)) }
-        startActivity(intent)
-        finish()
     }*/
-
-    /*
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.run { putString(VISOR_KEY, text_visor.text.toString()) }
-        outState.run { putParcelableArrayList(EXTRA_HISTORY, ArrayList(operationList)) }
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        text_visor.text = savedInstanceState?.getString(VISOR_KEY)
-        operationList = ArrayList(savedInstanceState?.getParcelableArrayList(EXTRA_HISTORY))
-        super.onViewStateRestored(savedInstanceState)
-    }
-
-     */
 }
