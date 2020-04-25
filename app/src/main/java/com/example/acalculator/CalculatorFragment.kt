@@ -12,18 +12,15 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
 import kotlinx.android.synthetic.main.fragment_calculator.*
-import kotlinx.android.synthetic.main.fragment_calculator.view.*
 
-class CalculatorFragment : Fragment(), OnDisplayChanged {
+class CalculatorFragment : Fragment(), OnDisplayChanged{
 
-    private var lastCalc = ""
     private lateinit var viewModel: CalculatorViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_calculator, container, false)
         viewModel = ViewModelProviders.of(this).get(CalculatorViewModel::class.java)
         ButterKnife.bind(this, view)
-        list_historic?.layoutManager = LinearLayoutManager(activity as Context)
         return view
     }
 
@@ -32,8 +29,10 @@ class CalculatorFragment : Fragment(), OnDisplayChanged {
         super.onStart()
     }
 
-    override fun onDisplayChanged(value: String?) {
+    override fun onDisplayChanged(value: String?, list: MutableList<Operation>) {
         value.let { text_visor.text = it }
+        list_historic?.layoutManager = LinearLayoutManager(activity as Context)
+        list_historic?.adapter = HistoryAdapter(activity as Context,R.layout.item_expression, list)
     }
 
     override fun onDestroy() {

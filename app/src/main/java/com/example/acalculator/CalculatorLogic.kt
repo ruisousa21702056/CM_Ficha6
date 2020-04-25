@@ -1,6 +1,5 @@
 package com.example.acalculator
 
-import kotlinx.android.synthetic.main.fragment_calculator.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,6 +15,11 @@ class CalculatorLogic {
         } else {
             display + symbol
         }
+    }
+
+    fun getHistory(): MutableList<Operation> {
+        val list: MutableList<Operation> = storage.getAll() as MutableList<Operation>
+        return list
     }
 
     fun deleteLastCharacter(display: String): String {

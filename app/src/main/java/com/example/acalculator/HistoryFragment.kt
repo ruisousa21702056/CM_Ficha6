@@ -6,26 +6,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
 import kotlinx.android.synthetic.main.fragment_history.*
 
 class HistoryFragment : Fragment() {
 
-    private val operations = ArrayList<Operation>()
+    private lateinit var viewModel: HistoryViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val op = Operation("2+2",4.0)
-        operations.add(op)
         val view = inflater.inflate(R.layout.fragment_history, container, false)
+        viewModel = ViewModelProviders.of(this).get(HistoryViewModel::class.java)
         ButterKnife.bind(this, view)
         return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        this.list_historic?.layoutManager = LinearLayoutManager(activity as Context)
-        this.list_historic?.adapter = HistoryAdapter(activity as Context,R.layout.item_expression, operations)
         super.onActivityCreated(savedInstanceState)
+        if(!viewModel.getHistory().isNullOrEmpty()){
+            this.list_historic?.layoutManager = LinearLayoutManager(activity as Context)
+            this.list_historic?.adapter = HistoryAdapter(activity as Context,R.layout.item_expression, viewModel.getHistory())
+        }
+
+
     }
 
 }

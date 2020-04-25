@@ -4,23 +4,23 @@ import androidx.lifecycle.ViewModel
 
 class CalculatorViewModel : ViewModel() {
 
-    private var listener: OnDisplayChanged? = null
+    private var listener_display: OnDisplayChanged? = null
 
     private val calculatorLogic = CalculatorLogic()
     var display = "0"
-    var list_historic_historic = ArrayList<Operation>()
+    var list_historic_land = mutableListOf<Operation>()
 
     private fun notifyOnDisplayChanged(){
-        listener?.onDisplayChanged(display)
+        listener_display?.onDisplayChanged(display,list_historic_land)
     }
 
-    fun registerListener(listener: OnDisplayChanged){
-        this.listener = listener
-        listener?.onDisplayChanged(display)
+    fun registerListener(listener_display: OnDisplayChanged){
+        this.listener_display = listener_display
+        listener_display.onDisplayChanged(display,list_historic_land)
     }
 
     fun unregisterListener() {
-        listener = null
+        listener_display = null
     }
 
     fun onClickSymbol(symbol: String) {
@@ -30,6 +30,7 @@ class CalculatorViewModel : ViewModel() {
 
     fun onClickEquals() {
         display = calculatorLogic.performOperation(display).toString()
+        list_historic_land = calculatorLogic.getHistory()
         notifyOnDisplayChanged()
     }
 
