@@ -33,7 +33,7 @@ class LoginLogic {
         return storage.getLoggedUser()
     }
 
-    fun addUser(user: User): Boolean {
+    private fun addUser(user: User): Boolean {
         CoroutineScope(Dispatchers.IO).launch {
             storage.insert(user)
         }

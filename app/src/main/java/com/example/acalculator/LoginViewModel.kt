@@ -11,19 +11,12 @@ class LoginViewModel : ViewModel() {
     }
 
     fun login(email: String, password: String): Boolean{
-        /*if(loginLogic.login(email,password)){
-            NavigationManager.goToCalculatorFragment(getFragmentManager())
-        }*/
         return loginLogic.login(email,password)
 
     }
 
     fun getLoggedUser(): User{
         return loginLogic.getLoggedUser()
-    }
-
-    fun updateLoggedUser(user: User) {
-
     }
 
     fun logout(){
