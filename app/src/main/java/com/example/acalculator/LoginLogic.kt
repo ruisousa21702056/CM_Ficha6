@@ -6,7 +6,7 @@ class LoginLogic {
 
     private var storage = UserStorage.getInstance()
 
-    fun getUsers(): List<User> {
+    private fun getUsers(): List<User> {
         return storage.getAll()
     }
 
