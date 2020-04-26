@@ -1,8 +1,9 @@
 package com.example.acalculator
 
+import androidx.lifecycle.ViewModel
 import org.apache.commons.codec.digest.DigestUtils
 
-class SignUpViewModel {
+class SignUpViewModel : ViewModel() {
 
     private val signUpLogic = SignUpLogic()
 
@@ -11,15 +12,11 @@ class SignUpViewModel {
     }
 
     fun signUp(name: String, email: String, password: String, confirmPassword: String): Boolean{
-        if(!name.equals("") && !email.equals("") && password.equals(confirmPassword)){
-            signUpLogic.addUser()
+        if(!name.equals("") && !email.equals("") && !email.equals("") && password.equals(confirmPassword) ){
+            var user_aux = User(name, email, DigestUtils.sha256Hex(password))
+            signUpLogic.addUser(user_aux)
+            return true
         }
-            val text_pass_aux = DigestUtils.sha256Hex(text_pass)
-            val user = User(text_name,text_email, text_pass_aux)
-            var usersAux = ArrayList<User>()
-            if(users != null){
-                usersAux = users
-            }
-            usersAux.add(user)
+        return false
     }
 }

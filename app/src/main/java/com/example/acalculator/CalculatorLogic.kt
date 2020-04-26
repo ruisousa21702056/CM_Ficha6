@@ -8,7 +8,6 @@ import net.objecthunter.exp4j.ExpressionBuilder
 class CalculatorLogic {
 
     private var operations_storage = ListStorage.getInstance()
-    private var users_storage = UserStorage.getInstance()
 
     fun insertSymbol(display: String, symbol: String): String {
         return if(display == "0") {
@@ -35,9 +34,5 @@ class CalculatorLogic {
             operations_storage.insert(Operation(expression, result))
         }
         return result
-    }
-
-    fun getLoggedUser(): User{
-        return users_storage.getLoggedUser()
     }
 }

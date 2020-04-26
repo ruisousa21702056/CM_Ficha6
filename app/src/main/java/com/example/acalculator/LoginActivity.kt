@@ -28,8 +28,6 @@ class LoginActivity : AppCompatActivity() {
             else{
                Toast.makeText(this,"E-mail/Password inválidos", Toast.LENGTH_LONG).show()
             }
-
-
         }
 
         regist_login_button.setOnClickListener {
@@ -38,6 +36,4 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
     }
-
-
 }

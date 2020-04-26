@@ -20,9 +20,5 @@ abstract class NavigationManager {
         fun goToHistoryFragment(fm: FragmentManager) {
             placeFragment(fm, HistoryFragment())
         }
-
-        fun goToLoginFragment(fm: FragmentManager) {
-            placeFragment(fm, LoginFragment())
-        }
     }
 }
