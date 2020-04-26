@@ -18,16 +18,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if(!screenRotated(savedInstanceState)) {
             NavigationManager.goToCalculatorFragment(supportFragmentManager)
         }
-
-            /*if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            this.list_historic?.layoutManager = LinearLayoutManager(this)
-            this.list_historic?.adapter = HistoryAdapter(this, R.layout.item_expression,
-                operationList)
-            *//*button_equals.setOnClickListener {
-                onClickEquals()
-                adapter.notifyDataSetChanged()
-            }*//*
-        }*/
     }
 
     private fun screenRotated(savedInstanceState: Bundle?) : Boolean {

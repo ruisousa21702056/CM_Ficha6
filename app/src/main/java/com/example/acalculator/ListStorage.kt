@@ -23,21 +23,19 @@ class ListStorage private constructor(){
 
     suspend fun insert(operation: Operation) {
         withContext(Dispatchers.IO) {
-            //Thread.sleep(30000)
             storage.add(operation)
         }
 
     }
 
-    fun getAll(): List<Operation>{
+    fun getAll(): List<Operation> {
         return storage.toList()
     }
 
-    /*suspend fun getAll(): MutableList<Operation> {
-        var list = mutableListOf<Operation>()
+    /*suspend fun getAll(): List<Operation>{
+        var list = listOf<Operation>()
         withContext(Dispatchers.IO) {
-            //Thread.sleep(30000)
-            list = storage
+            list = storage.toList()
         }
         return list
     }*/

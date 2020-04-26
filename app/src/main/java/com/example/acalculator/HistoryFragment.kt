@@ -24,11 +24,8 @@ class HistoryFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if(!viewModel.getHistory().isNullOrEmpty()){
-            this.list_historic?.layoutManager = LinearLayoutManager(activity as Context)
-            this.list_historic?.adapter = HistoryAdapter(activity as Context,R.layout.item_expression, viewModel.getHistory())
-        }
-
+        this.list_historic?.layoutManager = LinearLayoutManager(activity as Context)
+        this.list_historic?.adapter = HistoryAdapter(activity as Context,R.layout.item_expression, viewModel.getHistory())
 
     }
 

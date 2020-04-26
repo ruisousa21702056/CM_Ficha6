@@ -8,7 +8,7 @@ class CalculatorViewModel : ViewModel() {
 
     private val calculatorLogic = CalculatorLogic()
     var display = "0"
-    var list_historic_land = mutableListOf<Operation>()
+    var list_historic_land = listOf<Operation>()
 
     private fun notifyOnDisplayChanged(){
         listener_display?.onDisplayChanged(display,list_historic_land)
@@ -41,6 +41,11 @@ class CalculatorViewModel : ViewModel() {
 
     fun onDeleteLastCharacter() {
         display = calculatorLogic.deleteLastCharacter(display)
+        notifyOnDisplayChanged()
+    }
+
+    fun onClickLastOperation() {
+        display = list_historic_land.get(list_historic_land.size -1).expression
         notifyOnDisplayChanged()
     }
 

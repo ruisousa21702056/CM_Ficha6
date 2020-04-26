@@ -4,9 +4,14 @@ import androidx.lifecycle.ViewModel
 
 class HistoryViewModel : ViewModel() {
 
+    private var listener_onLongClick: OnLongClick? = null
     private val historyLogic = HistoryLogic()
 
-    fun getHistory(): MutableList<Operation> {
+    private fun notifyOnLongClick(){
+        listener_onLongClick?.OnLongClick()
+    }
+
+    fun getHistory(): List<Operation> {
         return historyLogic.getHistory()
     }
 

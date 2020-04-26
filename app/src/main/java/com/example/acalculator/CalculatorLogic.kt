@@ -17,10 +17,14 @@ class CalculatorLogic {
         }
     }
 
-    fun getHistory(): MutableList<Operation> {
-        val list: MutableList<Operation> = storage.getAll() as MutableList<Operation>
+    fun getHistory(): List<Operation> = storage.getAll()
+    /*fun getHistory(): List<Operation>{
+        var list = listOf<Operation>()
+        CoroutineScope(Dispatchers.IO).launch {
+            list = storage.getAll()
+        }
         return list
-    }
+    }*/
 
     fun deleteLastCharacter(display: String): String {
         return if (display.length > 1) {

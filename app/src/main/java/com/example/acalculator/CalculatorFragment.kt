@@ -29,11 +29,13 @@ class CalculatorFragment : Fragment(), OnDisplayChanged{
         super.onStart()
     }
 
-    override fun onDisplayChanged(value: String?, list: MutableList<Operation>) {
+    override fun onDisplayChanged(value: String?, list: List<Operation>) {
         value.let { text_visor.text = it }
         list_historic?.layoutManager = LinearLayoutManager(activity as Context)
         list_historic?.adapter = HistoryAdapter(activity as Context,R.layout.item_expression, list)
     }
+
+
 
     override fun onDestroy() {
         viewModel.unregisterListener()
@@ -65,10 +67,9 @@ class CalculatorFragment : Fragment(), OnDisplayChanged{
         viewModel.onClickEquals()
     }
 
-    /*
     @Optional
     @OnClick(R.id.button_lastCalc)
-    fun onClickLastCalc() {
-        text_visor.text = lastCalc
-    }*/
+    fun onClickLastOperation() {
+        viewModel.onClickLastOperation()
+    }
 }
