@@ -49,5 +49,9 @@ class CalculatorViewModel : ViewModel() {
         notifyOnDisplayChanged()
     }
 
+    fun getLoggedUser(): User{
+        return calculatorLogic.getLoggedUser()
+    }
+
 
 }

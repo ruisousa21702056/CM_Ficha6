@@ -5,7 +5,9 @@ import kotlinx.coroutines.withContext
 
 class UserStorage private constructor() {
 
-    private val storage = mutableListOf<User>()
+    private val users_list = mutableListOf<User>()
+    private var logged_user = User()
+
 
     companion object {
 
@@ -23,19 +25,27 @@ class UserStorage private constructor() {
 
     suspend fun insert(user: User) {
         withContext(Dispatchers.IO) {
-            storage.add(user)
+            users_list.add(user)
         }
 
     }
 
     fun getAll(): List<User> {
-        return storage.toList()
+        return users_list.toList()
+    }
+
+    fun getLoggedUser(): User {
+        return this.logged_user
+    }
+
+    fun updateLoggedUser(user: User) {
+        this.logged_user = user
     }
 
     suspend fun delete(user: User) {
         withContext(Dispatchers.IO) {
             //Thread.sleep(30000)
-            storage.remove(user)
+            users_list.remove(user)
         }
     }
 }

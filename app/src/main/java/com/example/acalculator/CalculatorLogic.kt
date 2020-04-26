@@ -7,7 +7,8 @@ import net.objecthunter.exp4j.ExpressionBuilder
 
 class CalculatorLogic {
 
-    private var storage = ListStorage.getInstance()
+    private var operations_storage = ListStorage.getInstance()
+    private var users_storage = UserStorage.getInstance()
 
     fun insertSymbol(display: String, symbol: String): String {
         return if(display == "0") {
@@ -17,14 +18,7 @@ class CalculatorLogic {
         }
     }
 
-    fun getHistory(): List<Operation> = storage.getAll()
-    /*fun getHistory(): List<Operation>{
-        var list = listOf<Operation>()
-        CoroutineScope(Dispatchers.IO).launch {
-            list = storage.getAll()
-        }
-        return list
-    }*/
+    fun getHistory(): List<Operation> = operations_storage.getAll()
 
     fun deleteLastCharacter(display: String): String {
         return if (display.length > 1) {
@@ -38,8 +32,12 @@ class CalculatorLogic {
         val expressionBuilder = ExpressionBuilder(expression).build()
         val result = expressionBuilder.evaluate()
         CoroutineScope(Dispatchers.IO).launch {
-            storage.insert(Operation(expression, result))
+            operations_storage.insert(Operation(expression, result))
         }
         return result
+    }
+
+    fun getLoggedUser(): User{
+        return users_storage.getLoggedUser()
     }
 }

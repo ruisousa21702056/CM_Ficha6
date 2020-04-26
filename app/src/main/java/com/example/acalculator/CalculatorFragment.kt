@@ -35,8 +35,6 @@ class CalculatorFragment : Fragment(), OnDisplayChanged{
         list_historic?.adapter = HistoryAdapter(activity as Context,R.layout.item_expression, list)
     }
 
-
-
     override fun onDestroy() {
         viewModel.unregisterListener()
         super.onDestroy()

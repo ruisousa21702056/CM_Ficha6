@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.drawer_header.view.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
@@ -15,6 +16,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         setupDrawerMenu()
+        val user_name = intent.getStringExtra("user_name")
+        user_name.let { nav_drawer.getHeaderView(0).drawer_name.text = it }
+        val user_email = intent.getStringExtra("user_email")
+        user_email.let { nav_drawer.getHeaderView(0).drawer_email.text = it }
         if(!screenRotated(savedInstanceState)) {
             NavigationManager.goToCalculatorFragment(supportFragmentManager)
         }
@@ -46,5 +51,4 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         else if (supportFragmentManager.backStackEntryCount == 1) finish()
         else super.onBackPressed()
     }
-
 }

@@ -14,6 +14,4 @@ class HistoryViewModel : ViewModel() {
     fun getHistory(): List<Operation> {
         return historyLogic.getHistory()
     }
-
-
 }

@@ -1,8 +1,8 @@
 package com.example.acalculator
 
-import org.apache.commons.codec.digest.DigestUtils
+import androidx.lifecycle.ViewModel
 
-class LoginViewModel {
+class LoginViewModel : ViewModel() {
 
     private val loginLogic = LoginLogic()
 
@@ -10,13 +10,24 @@ class LoginViewModel {
         return loginLogic.getUsers()
     }
 
-    fun validateCredentials(email: String, password: String): Boolean{
-        val users = getUsers()
-        for(user in users) {
-            if ((user.email == email) and (user.password == DigestUtils.sha256Hex(password))) {
-                return true
-            }
-        }
-        return false
+    fun login(email: String, password: String): Boolean{
+        /*if(loginLogic.login(email,password)){
+            NavigationManager.goToCalculatorFragment(getFragmentManager())
+        }*/
+        return loginLogic.login(email,password)
+
+    }
+
+    fun getLoggedUser(): User{
+        return loginLogic.getLoggedUser()
+    }
+
+    fun updateLoggedUser(user: User) {
+
+    }
+
+    fun logout(){
+        val user = User()
+        loginLogic.updateLoggedUser(user)
     }
 }
