@@ -1,4 +1,4 @@
-package com.example.acalculator
+package com.example.acalculator.data.local.user
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -16,7 +16,8 @@ class UserStorage private constructor() {
         fun getInstance(): UserStorage {
             synchronized(this) {
                 if (instance == null) {
-                    instance = UserStorage()
+                    instance =
+                        UserStorage()
                 }
                 return instance as UserStorage
             }

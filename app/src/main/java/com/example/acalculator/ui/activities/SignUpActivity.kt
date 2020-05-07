@@ -1,14 +1,13 @@
-package com.example.acalculator
+package com.example.acalculator.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.acalculator.R
+import com.example.acalculator.ui.viewmodels.SignUpViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import org.apache.commons.codec.digest.DigestUtils
 
 class SignUpActivity : AppCompatActivity() {
 

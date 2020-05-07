@@ -1,10 +1,12 @@
-package com.example.acalculator
+package com.example.acalculator.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
+import com.example.acalculator.ui.viewmodels.LoginViewModel
+import com.example.acalculator.R
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -18,7 +20,8 @@ class LoginActivity : AppCompatActivity() {
 
         login_button.setOnClickListener{
            if(viewModel.login(input_login_email.text.toString(),input_login_password.text.toString())){
-               var intentLogin = Intent(this,MainActivity::class.java)
+               var intentLogin = Intent(this,
+                   MainActivity::class.java)
                var logged_user = viewModel.getLoggedUser()
                intentLogin.apply { putExtra("user_name", logged_user.name) }
                intentLogin.apply { putExtra("user_email", logged_user.email) }

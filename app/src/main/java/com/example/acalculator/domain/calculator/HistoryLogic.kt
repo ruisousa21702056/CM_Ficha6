@@ -1,12 +1,12 @@
-package com.example.acalculator
+package com.example.acalculator.domain.calculator
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.acalculator.data.local.list.ListStorage
+import com.example.acalculator.data.local.list.Operation
 
 class HistoryLogic {
 
-    private var storage = ListStorage.getInstance()
+    private var storage =
+        ListStorage.getInstance()
 
     fun getHistory(): List<Operation> {
         return storage.getAll()

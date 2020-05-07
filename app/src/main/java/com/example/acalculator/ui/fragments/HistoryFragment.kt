@@ -1,4 +1,4 @@
-package com.example.acalculator
+package com.example.acalculator.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
+import com.example.acalculator.ui.viewmodels.HistoryViewModel
+import com.example.acalculator.R
+import com.example.acalculator.ui.adapters.HistoryAdapter
 import kotlinx.android.synthetic.main.fragment_history.*
 
 class HistoryFragment : Fragment() {
@@ -25,8 +28,12 @@ class HistoryFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         this.list_historic?.layoutManager = LinearLayoutManager(activity as Context)
-        this.list_historic?.adapter = HistoryAdapter(activity as Context,R.layout.item_expression, viewModel.getHistory())
-
+        this.list_historic?.adapter =
+            HistoryAdapter(
+                activity as Context,
+                R.layout.item_expression,
+                viewModel.getHistory()
+            )
     }
 
 }

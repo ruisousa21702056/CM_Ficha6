@@ -1,4 +1,4 @@
-package com.example.acalculator
+package com.example.acalculator.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -11,9 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
+import com.example.acalculator.*
+import com.example.acalculator.data.local.list.Operation
+import com.example.acalculator.ui.adapters.HistoryAdapter
+import com.example.acalculator.ui.listeners.OnDisplayChanged
+import com.example.acalculator.ui.viewmodels.CalculatorViewModel
 import kotlinx.android.synthetic.main.fragment_calculator.*
+import kotlinx.coroutines.InternalCoroutinesApi
 
-class CalculatorFragment : Fragment(), OnDisplayChanged{
+class CalculatorFragment : Fragment(),
+    OnDisplayChanged {
 
     private lateinit var viewModel: CalculatorViewModel
 
@@ -32,7 +39,12 @@ class CalculatorFragment : Fragment(), OnDisplayChanged{
     override fun onDisplayChanged(value: String?, list: List<Operation>) {
         value.let { text_visor.text = it }
         list_historic?.layoutManager = LinearLayoutManager(activity as Context)
-        list_historic?.adapter = HistoryAdapter(activity as Context,R.layout.item_expression, list)
+        list_historic?.adapter =
+            HistoryAdapter(
+                activity as Context,
+                R.layout.item_expression,
+                list
+            )
     }
 
     override fun onDestroy() {
@@ -40,13 +52,32 @@ class CalculatorFragment : Fragment(), OnDisplayChanged{
         super.onDestroy()
     }
 
+    @InternalCoroutinesApi
     @Optional
-    @OnClick(R.id.button_0, R.id.button_00, R.id.button_1, R.id.button_2, R.id.button_2_1,
-        R.id.button_3, R.id.button_4, R.id.button_5, R.id.button_6, R.id.button_7, R.id.button_8,
-    R.id.button_adition, R.id.button_division, R.id.button_minus, R.id.button_multiply, R.id.button_point )
+    @OnClick(
+        R.id.button_0,
+        R.id.button_00,
+        R.id.button_1,
+        R.id.button_2,
+        R.id.button_2_1,
+        R.id.button_3,
+        R.id.button_4,
+        R.id.button_5,
+        R.id.button_6,
+        R.id.button_7,
+        R.id.button_8,
+        R.id.button_adition,
+        R.id.button_division,
+        R.id.button_minus,
+        R.id.button_multiply,
+        R.id.button_point
+    )
     fun onClickSymbol(view: View) {
         viewModel.onClickSymbol(view.tag.toString())
+        //NavigationManager.goToHistoryFragment(activity?.supportFragmentManager!!)
     }
+
+
 
     @Optional
     @OnClick(R.id.button_C)
@@ -54,12 +85,14 @@ class CalculatorFragment : Fragment(), OnDisplayChanged{
         viewModel.onClickReset()
     }
 
+    @InternalCoroutinesApi
     @Optional
     @OnClick(R.id.button_back)
     fun onClickDeleteLast() {
         viewModel.onDeleteLastCharacter()
     }
 
+    @InternalCoroutinesApi
     @OnClick(R.id.button_equals)
     fun onClickEquals() {
         viewModel.onClickEquals()

@@ -1,4 +1,4 @@
-package com.example.acalculator
+package com.example.acalculator.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.acalculator.data.local.list.Operation
 import kotlinx.android.synthetic.main.item_expression.view.*
 
 class HistoryAdapter(private val context: Context, private val layout: Int,
-                     private val items: List<Operation>) : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
+                      private val items: List<Operation>) : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
     class HistoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val expression: TextView = view.text_expression
@@ -17,7 +18,9 @@ class HistoryAdapter(private val context: Context, private val layout: Int,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
-        return HistoryViewHolder(LayoutInflater.from(context).inflate(layout,parent,false))
+        return HistoryViewHolder(
+            LayoutInflater.from(context).inflate(layout, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {

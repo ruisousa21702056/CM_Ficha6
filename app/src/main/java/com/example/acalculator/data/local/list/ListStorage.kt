@@ -1,4 +1,4 @@
-package com.example.acalculator
+package com.example.acalculator.data.local.list
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -14,7 +14,8 @@ class ListStorage private constructor(){
         fun getInstance(): ListStorage {
             synchronized(this) {
                 if(instance == null) {
-                    instance = ListStorage()
+                    instance =
+                        ListStorage()
                 }
                 return instance as ListStorage
             }
@@ -30,20 +31,5 @@ class ListStorage private constructor(){
 
     fun getAll(): List<Operation> {
         return storage.toList()
-    }
-
-    /*suspend fun getAll(): List<Operation>{
-        var list = listOf<Operation>()
-        withContext(Dispatchers.IO) {
-            list = storage.toList()
-        }
-        return list
-    }*/
-
-    suspend fun delete(operation: Operation) {
-        withContext(Dispatchers.IO) {
-            //Thread.sleep(30000)
-            storage.remove(operation)
-        }
     }
 }

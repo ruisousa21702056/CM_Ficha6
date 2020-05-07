@@ -1,4 +1,4 @@
-package com.example.acalculator
+package com.example.acalculator.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import com.example.acalculator.R
+import com.example.acalculator.ui.utils.NavigationManager
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.drawer_header.view.*
@@ -31,7 +33,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun setupDrawerMenu() {
-        val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close)
+        val toggle = ActionBarDrawerToggle(this, drawer, toolbar,
+            R.string.drawer_open,
+            R.string.drawer_close
+        )
         nav_drawer.setNavigationItemSelectedListener(this)
         drawer.addDrawerListener(toggle)
         toggle.syncState()

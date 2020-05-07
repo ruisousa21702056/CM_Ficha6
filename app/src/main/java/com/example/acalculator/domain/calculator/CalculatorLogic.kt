@@ -1,13 +1,17 @@
-package com.example.acalculator
+package com.example.acalculator.domain.calculator
 
+import com.example.acalculator.data.local.list.ListStorage
+import com.example.acalculator.data.local.list.Operation
+import com.example.acalculator.data.local.room.dao.OperationDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.objecthunter.exp4j.ExpressionBuilder
 
-class CalculatorLogic {
+class CalculatorLogic(private val storage: OperationDao) {
 
-    private var operations_storage = ListStorage.getInstance()
+    private var operations_storage =
+        ListStorage.getInstance()
 
     fun insertSymbol(display: String, symbol: String): String {
         return if(display == "0") {
@@ -31,7 +35,12 @@ class CalculatorLogic {
         val expressionBuilder = ExpressionBuilder(expression).build()
         val result = expressionBuilder.evaluate()
         CoroutineScope(Dispatchers.IO).launch {
-            operations_storage.insert(Operation(expression, result))
+            operations_storage.insert(
+                Operation(
+                    expression,
+                    result
+                )
+            )
         }
         return result
     }

@@ -1,6 +1,8 @@
-package com.example.acalculator
+package com.example.acalculator.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
+import com.example.acalculator.data.local.user.User
+import com.example.acalculator.domain.auth.SignUpLogic
 import org.apache.commons.codec.digest.DigestUtils
 
 class SignUpViewModel : ViewModel() {
@@ -13,7 +15,11 @@ class SignUpViewModel : ViewModel() {
 
     fun signUp(name: String, email: String, password: String, confirmPassword: String): Boolean{
         if(!name.equals("") && !email.equals("") && !email.equals("") && password.equals(confirmPassword) ){
-            var user_aux = User(name, email, DigestUtils.sha256Hex(password))
+            var user_aux = User(
+                name,
+                email,
+                password
+            )
             signUpLogic.addUser(user_aux)
             return true
         }
