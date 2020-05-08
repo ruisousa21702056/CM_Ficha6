@@ -10,9 +10,6 @@ import net.objecthunter.exp4j.ExpressionBuilder
 
 class CalculatorLogic(private val storage: OperationDao) {
 
-    private var operations_storage =
-        ListStorage.getInstance()
-
     fun insertSymbol(display: String, symbol: String): String {
         return if(display == "0") {
             symbol
@@ -21,7 +18,7 @@ class CalculatorLogic(private val storage: OperationDao) {
         }
     }
 
-    fun getHistory(): List<Operation> = operations_storage.getAll()
+    fun getHistory(): List<Operation> = storage.getAll()
 
     fun deleteLastCharacter(display: String): String {
         return if (display.length > 1) {
@@ -35,7 +32,7 @@ class CalculatorLogic(private val storage: OperationDao) {
         val expressionBuilder = ExpressionBuilder(expression).build()
         val result = expressionBuilder.evaluate()
         CoroutineScope(Dispatchers.IO).launch {
-            operations_storage.insert(
+            storage.insert(
                 Operation(
                     expression,
                     result

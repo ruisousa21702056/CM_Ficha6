@@ -2,6 +2,7 @@ package com.example.acalculator.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +13,12 @@ import butterknife.ButterKnife
 import com.example.acalculator.ui.viewmodels.HistoryViewModel
 import com.example.acalculator.R
 import com.example.acalculator.ui.adapters.HistoryAdapter
+import com.example.acalculator.ui.listeners.OnLongClick
 import kotlinx.android.synthetic.main.fragment_history.*
 
-class HistoryFragment : Fragment() {
+class HistoryFragment : Fragment(), OnLongClick {
 
+    private val TAG = HistoryFragment::class.java.simpleName
     private lateinit var viewModel: HistoryViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,8 +35,16 @@ class HistoryFragment : Fragment() {
             HistoryAdapter(
                 activity as Context,
                 R.layout.item_expression,
-                viewModel.getHistory()
+                viewModel.getHistory(),
+                this
             )
     }
+
+    override fun onLongClick(position: Int,view: View): Boolean {
+        Log.e(TAG, "CLICK LONG $position")
+        //lista.remove(po)
+        return true
+    }
+
 
 }

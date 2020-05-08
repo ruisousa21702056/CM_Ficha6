@@ -2,6 +2,7 @@ package com.example.acalculator.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,13 +16,15 @@ import com.example.acalculator.*
 import com.example.acalculator.data.local.list.Operation
 import com.example.acalculator.ui.adapters.HistoryAdapter
 import com.example.acalculator.ui.listeners.OnDisplayChanged
+import com.example.acalculator.ui.listeners.OnLongClick
 import com.example.acalculator.ui.viewmodels.CalculatorViewModel
 import kotlinx.android.synthetic.main.fragment_calculator.*
 import kotlinx.coroutines.InternalCoroutinesApi
 
-class CalculatorFragment : Fragment(),
-    OnDisplayChanged {
+ class CalculatorFragment : Fragment(),
+    OnDisplayChanged, OnLongClick {
 
+    private val TAG = CalculatorFragment::class.java.simpleName
     private lateinit var viewModel: CalculatorViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,7 +46,8 @@ class CalculatorFragment : Fragment(),
             HistoryAdapter(
                 activity as Context,
                 R.layout.item_expression,
-                list
+                list,
+                this
             )
     }
 
@@ -103,4 +107,9 @@ class CalculatorFragment : Fragment(),
     fun onClickLastOperation() {
         viewModel.onClickLastOperation()
     }
+
+     override fun onLongClick(position: Int,view: View): Boolean {
+         Log.e(TAG, "CLICK LONG $position")
+         return true
+     }
 }

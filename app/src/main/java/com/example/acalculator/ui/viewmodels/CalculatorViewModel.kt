@@ -10,8 +10,10 @@ import kotlinx.coroutines.InternalCoroutinesApi
 
 class CalculatorViewModel(application: Application) : AndroidViewModel(application) {
 
+    @InternalCoroutinesApi
     private val storage = CalculatorDatabase.getInstance(application).operationDao()
 
+    @InternalCoroutinesApi
     private val calculatorLogic = CalculatorLogic(storage)
 
     private var listener_display: OnDisplayChanged? = null
