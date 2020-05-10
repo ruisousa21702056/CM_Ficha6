@@ -56,7 +56,6 @@ import kotlinx.coroutines.InternalCoroutinesApi
         super.onDestroy()
     }
 
-    @InternalCoroutinesApi
     @Optional
     @OnClick(
         R.id.button_0,
@@ -89,14 +88,12 @@ import kotlinx.coroutines.InternalCoroutinesApi
         viewModel.onClickReset()
     }
 
-    @InternalCoroutinesApi
     @Optional
     @OnClick(R.id.button_back)
     fun onClickDeleteLast() {
         viewModel.onDeleteLastCharacter()
     }
 
-    @InternalCoroutinesApi
     @OnClick(R.id.button_equals)
     fun onClickEquals() {
         viewModel.onClickEquals()

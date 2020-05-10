@@ -1,6 +1,5 @@
 package com.example.acalculator.domain.calculator
 
-import com.example.acalculator.data.local.list.ListStorage
 import com.example.acalculator.data.local.list.Operation
 import com.example.acalculator.data.local.room.dao.OperationDao
 import kotlinx.coroutines.CoroutineScope
@@ -18,7 +17,7 @@ class CalculatorLogic(private val storage: OperationDao) {
         }
     }
 
-    fun getHistory(): List<Operation> = storage.getAll()
+    suspend fun getHistory(): List<Operation> = storage.getAll()
 
     fun deleteLastCharacter(display: String): String {
         return if (display.length > 1) {

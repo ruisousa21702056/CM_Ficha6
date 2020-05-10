@@ -10,10 +10,8 @@ import kotlinx.coroutines.InternalCoroutinesApi
 
 class CalculatorViewModel(application: Application) : AndroidViewModel(application) {
 
-    @InternalCoroutinesApi
     private val storage = CalculatorDatabase.getInstance(application).operationDao()
 
-    @InternalCoroutinesApi
     private val calculatorLogic = CalculatorLogic(storage)
 
     private var listener_display: OnDisplayChanged? = null
@@ -34,14 +32,12 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         listener_display = null
     }
 
-    @InternalCoroutinesApi
     fun onClickSymbol(symbol: String) {
         display = calculatorLogic.insertSymbol(display,symbol)
         notifyOnDisplayChanged()
     }
 
-    @InternalCoroutinesApi
-    fun onClickEquals() {
+    suspend fun onClickEquals() {
         display = calculatorLogic.performOperation(display).toString()
         list_historic_land = calculatorLogic.getHistory()
         notifyOnDisplayChanged()
@@ -52,7 +48,6 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         notifyOnDisplayChanged()
     }
 
-    @InternalCoroutinesApi
     fun onDeleteLastCharacter() {
         display = calculatorLogic.deleteLastCharacter(display)
         notifyOnDisplayChanged()

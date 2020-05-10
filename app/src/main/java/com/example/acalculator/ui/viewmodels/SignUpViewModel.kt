@@ -3,7 +3,6 @@ package com.example.acalculator.ui.viewmodels
 import androidx.lifecycle.ViewModel
 import com.example.acalculator.data.local.user.User
 import com.example.acalculator.domain.auth.SignUpLogic
-import org.apache.commons.codec.digest.DigestUtils
 
 class SignUpViewModel : ViewModel() {
 

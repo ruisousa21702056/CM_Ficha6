@@ -5,8 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.acalculator.data.local.list.Operation
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.internal.synchronized
 
 @Database(entities = arrayOf(Operation::class), version = 1)
 abstract class CalculatorDatabase : RoomDatabase() {
@@ -17,7 +15,6 @@ abstract class CalculatorDatabase : RoomDatabase() {
 
         private var instance: CalculatorDatabase? = null
 
-        @InternalCoroutinesApi
         fun getInstance(applicationContext: Context): CalculatorDatabase {
             synchronized(this) {
                 if(instance == null) {
