@@ -17,7 +17,26 @@ class LoginLogic(private val retrofit: Retrofit) {
         return storage.getAll()
     }
 
-    /*fun login(email: String, password: String): Boolean{
+    fun login(email: String, password: String): Boolean{
+        val service = retrofit.create(AuthService::class.java)
+        var bool = true
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = service.login(Login(email, password))
+            if (response.isSuccessful) {
+                bool = loginUser(email, password)
+            }
+            else {
+                bool = true
+            }
+        }
+        return bool
+    }
+
+    fun getLoggedUser(): User {
+        return storage.getLoggedUser()
+    }
+
+    private fun loginUser(email: String, password: String): Boolean{
         val users = getUsers()
         if(!users.isNullOrEmpty() && email != "" && password != ""){
             for(user in users) {
@@ -30,24 +49,5 @@ class LoginLogic(private val retrofit: Retrofit) {
             }
         }
         return false
-    }*/
-
-    suspend fun login(email: String, password: String): Boolean{
-        val service = retrofit.create(AuthService::class.java)
-        val response = service.login(Login(email,password))
-        CoroutineScope(Dispatchers.IO).launch {
-            if(response.isSuccessful) {
-                //temos acesso ao objeto de LoginResponse através do método
-                //response.body
-            }
-            else{
-                //erro de autenticação
-            }
-        }
-        return true
-    }
-
-    fun getLoggedUser(): User {
-        return storage.getLoggedUser()
     }
 }

@@ -1,4 +1,4 @@
-package com.example.acalculator.data.local.list
+package com.example.acalculator.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

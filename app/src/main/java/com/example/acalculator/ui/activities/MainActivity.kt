@@ -19,8 +19,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         setupDrawerMenu()
-
-
         val user_name = intent.getStringExtra("user_name")
         user_name.let { nav_drawer.getHeaderView(0).drawer_name.text = it }
         val user_email = intent.getStringExtra("user_email")

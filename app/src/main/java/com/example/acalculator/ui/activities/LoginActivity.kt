@@ -8,6 +8,9 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.acalculator.ui.viewmodels.LoginViewModel
 import com.example.acalculator.R
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
@@ -19,18 +22,19 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         login_button.setOnClickListener{
-           if(viewModel.login(input_login_email.text.toString(),input_login_password.text.toString())){
-               var intentLogin = Intent(this,
-                   MainActivity::class.java)
-               var logged_user = viewModel.getLoggedUser()
-               intentLogin.apply { putExtra("user_name", logged_user.name) }
-               intentLogin.apply { putExtra("user_email", logged_user.email) }
-               startActivity(intentLogin)
-               finish()
-           }
-            else{
-               Toast.makeText(this,"E-mail/Password inválidos", Toast.LENGTH_LONG).show()
-            }
+                if(viewModel.login(input_login_email.text.toString(),input_login_password.text.toString())){
+                    var intentLogin = Intent(this,
+                        MainActivity::class.java)
+                    var logged_user = viewModel.getLoggedUser()
+                    intentLogin.apply { putExtra("user_name", logged_user.name) }
+                    intentLogin.apply { putExtra("user_email", logged_user.email) }
+                    startActivity(intentLogin)
+                    finish()
+                }
+                else{
+                    Toast.makeText(this,"E-mail/Password inválidos", Toast.LENGTH_LONG).show()
+                }
+
         }
 
         regist_login_button.setOnClickListener {

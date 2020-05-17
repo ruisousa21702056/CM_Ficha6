@@ -1,10 +1,11 @@
-package com.example.acalculator.data.local.room.dao
+package com.example.acalculator.data.local.room
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.acalculator.data.local.list.Operation
+import com.example.acalculator.data.local.entities.Operation
+import com.example.acalculator.data.local.room.dao.OperationDao
 
 @Database(entities = arrayOf(Operation::class), version = 1)
 abstract class CalculatorDatabase : RoomDatabase() {

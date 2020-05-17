@@ -1,19 +1,18 @@
 package com.example.acalculator.domain.calculator
 
-import com.example.acalculator.data.local.list.ListStorage
-import com.example.acalculator.data.local.list.Operation
+import com.example.acalculator.data.local.entities.Operation
+import com.example.acalculator.data.local.room.dao.OperationDao
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class HistoryLogic {
-
-    private var storage =
-        ListStorage.getInstance()
+class HistoryLogic(private val storage: OperationDao) {
 
     fun getHistory(): List<Operation> {
-        return storage.getAll()
-        /*var list = listOf<Operation>()
+        var list = listOf<Operation>()
         CoroutineScope(Dispatchers.IO).launch {
-            list = storage.getAll()
+            list =  storage.getAll()
         }
-        return list*/
+        return list
     }
 }

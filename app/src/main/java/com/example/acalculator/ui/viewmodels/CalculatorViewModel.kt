@@ -2,11 +2,13 @@ package com.example.acalculator.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.example.acalculator.data.local.list.Operation
-import com.example.acalculator.data.local.room.dao.CalculatorDatabase
+import com.example.acalculator.data.local.entities.Operation
+import com.example.acalculator.data.local.room.CalculatorDatabase
 import com.example.acalculator.domain.calculator.CalculatorLogic
 import com.example.acalculator.ui.listeners.OnDisplayChanged
-import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CalculatorViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -37,10 +39,12 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         notifyOnDisplayChanged()
     }
 
-    suspend fun onClickEquals() {
-        display = calculatorLogic.performOperation(display).toString()
-        list_historic_land = calculatorLogic.getHistory()
-        notifyOnDisplayChanged()
+    fun onClickEquals() {
+        CoroutineScope(Dispatchers.Main).launch {
+            display = calculatorLogic.performOperation(display).toString()
+            list_historic_land = calculatorLogic.getHistory()
+            notifyOnDisplayChanged()
+        }
     }
 
     fun onClickReset() {
@@ -57,6 +61,4 @@ class CalculatorViewModel(application: Application) : AndroidViewModel(applicati
         display = list_historic_land.get(list_historic_land.size -1).expression
         notifyOnDisplayChanged()
     }
-
-
 }

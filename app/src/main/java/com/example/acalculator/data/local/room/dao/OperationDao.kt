@@ -3,7 +3,7 @@ package com.example.acalculator.data.local.room.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.acalculator.data.local.list.Operation
+import com.example.acalculator.data.local.entities.Operation
 
 @Dao
 interface OperationDao {

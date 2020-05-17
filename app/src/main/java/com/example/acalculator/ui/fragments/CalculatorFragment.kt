@@ -13,15 +13,14 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import butterknife.Optional
 import com.example.acalculator.*
-import com.example.acalculator.data.local.list.Operation
+import com.example.acalculator.data.local.entities.Operation
 import com.example.acalculator.ui.adapters.HistoryAdapter
 import com.example.acalculator.ui.listeners.OnDisplayChanged
 import com.example.acalculator.ui.listeners.OnLongClick
 import com.example.acalculator.ui.viewmodels.CalculatorViewModel
 import kotlinx.android.synthetic.main.fragment_calculator.*
-import kotlinx.coroutines.InternalCoroutinesApi
 
- class CalculatorFragment : Fragment(),
+class CalculatorFragment : Fragment(),
     OnDisplayChanged, OnLongClick {
 
     private val TAG = CalculatorFragment::class.java.simpleName
@@ -77,10 +76,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
     )
     fun onClickSymbol(view: View) {
         viewModel.onClickSymbol(view.tag.toString())
-        //NavigationManager.goToHistoryFragment(activity?.supportFragmentManager!!)
     }
-
-
 
     @Optional
     @OnClick(R.id.button_C)

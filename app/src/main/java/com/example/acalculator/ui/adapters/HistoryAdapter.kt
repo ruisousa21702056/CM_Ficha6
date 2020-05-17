@@ -1,18 +1,17 @@
 package com.example.acalculator.ui.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.acalculator.data.local.list.Operation
+import com.example.acalculator.data.local.entities.Operation
 import com.example.acalculator.ui.listeners.OnLongClick
 import kotlinx.android.synthetic.main.item_expression.view.*
 
 class HistoryAdapter(private val context: Context, private val layout: Int,
-                      private val items: List<Operation>, private val listener: OnLongClick) : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>()/*, View.OnLongClickListener*/ {
+                     private val items: List<Operation>, private val listener: OnLongClick) : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>()/*, View.OnLongClickListener*/ {
 
     class HistoryViewHolder(view: View,  private val listener: OnLongClick) : RecyclerView.ViewHolder(view) {
 

@@ -1,5 +1,6 @@
 package com.example.acalculator.data.local.list
 
+import com.example.acalculator.data.local.entities.Operation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

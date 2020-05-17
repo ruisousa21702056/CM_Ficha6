@@ -28,7 +28,6 @@ class UserStorage private constructor() {
         withContext(Dispatchers.IO) {
             users_list.add(user)
         }
-
     }
 
     fun getAll(): List<User> {
